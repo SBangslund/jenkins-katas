@@ -65,6 +65,7 @@ pipeline {
     }
     stage('Push Docker app') {
       environment {
+        // Retrieve credentials from the Jenkins server
         DOCKERCREDS = credentials('docker_login')
       }
       steps {
