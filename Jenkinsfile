@@ -70,6 +70,7 @@ pipeline {
       }
       steps {
         unstash 'code'
+        // Run the build-docker script
         sh 'ci/build-docker.sh'
         sh 'echo "$DOCKERCREDS_PSW" | docker login -u "$DOCKERCREDS_USR" --password-stdin'
         sh 'ci/push-docker.sh'
