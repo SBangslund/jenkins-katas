@@ -82,6 +82,7 @@ pipeline {
       }
     }
 
+    // Should not run on dev/ branches
     stage('Component test') {
       when { not { branch 'dev/' } 
         beforeAgent true
