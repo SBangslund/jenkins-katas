@@ -88,7 +88,6 @@ pipeline {
         branch 'master' 
         changeRequest()
         } 
-      } 
         beforeAgent true
       }
       steps {
