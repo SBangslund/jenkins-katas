@@ -18,6 +18,7 @@ pipeline {
           }
         }
 
+        // Wuw
         stage('Build app') {
           agent {
             docker {
