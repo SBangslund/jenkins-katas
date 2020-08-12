@@ -1,10 +1,8 @@
 pipeline {
   agent any
-    environment {
-      // Retrieve credentials from the Jenkins server
-      DOCKERCREDS = credentials('docker_login')
-    }
-
+  environment {
+    docker_username = 'saban17'
+  }
   stages {
     stage('Clone Down') {
       steps {
@@ -69,6 +67,10 @@ pipeline {
       }
     }
     stage('Push Docker app') {
+      environment {
+        // Retrieve credentials from the Jenkins server
+        DOCKERCREDS = credentials('docker_login')
+      }
       steps {
         unstash 'code'
         // Run the build-docker script
