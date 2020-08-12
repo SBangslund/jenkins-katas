@@ -1,6 +1,12 @@
 pipeline {
   agent any
   stages {
+    stage('Clone Down') {
+      steps {
+        stash(excludes: '.git/', name: 'code')
+      }
+    }
+
     stage('Parallel Execution') {
       parallel {
         stage('Say Hello') {
@@ -16,19 +22,24 @@ pipeline {
             }
 
           }
+          post {
+            always {
+              sh 'ls'
+              deleteDir()
+              sh 'ls'
+            }
+
+          }
           steps {
+            unstash 'code'
             sh 'ci/build-app.sh'
             archiveArtifacts 'app/build/libs/'
-          }
-          post {
-              always {
-                  sh 'ls'
-                  deleteDir()
-                  sh 'ls'
-              }
+            skipDefaultCheckout true
           }
         }
+
       }
     }
+
   }
 }
